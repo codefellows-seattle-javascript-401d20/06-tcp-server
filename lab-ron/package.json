@@ -1,0 +1,23 @@
+{
+  "name": "lab-06",
+  "version": "0.0.1",
+  "description": "lab 06 of code fellows",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest --coverage -i",
+    "test-watch": "jest --watch -i"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "faker": "^4.1.0"
+  },
+  "devDependencies": {
+        "eslint": "^4.6.1",
+    
+    "jest": "^21.1.0"
+
+  }
+}
