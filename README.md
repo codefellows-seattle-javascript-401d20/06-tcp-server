@@ -9,9 +9,8 @@
 
 #### Minimum Requirements
 * To start your server and connection using telnet:
-  * run `node index.js` in the terminal,
-  * confirm it has output `server runnning on port 4000`,
-  * run `telnet 127.0.0.1 local 4000` in the terminal
+  * run `npm start` in the terminal,
+  * confirm it has output `server running on port 4000`,
 * To use the chat room:
   * a different terminal tab or window than where the server and connection were initiated,
   * run `telnet 127.0.0.1 4000`. Chatroom should greet you with `welcome to the chatroom!` and tell you your nickname

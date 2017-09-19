@@ -7,6 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
+    "start": "node index.js",
     "lint": "eslint .",
     "test": "jest --coverage -i",
     "test-watch": "jest --watch -i"
