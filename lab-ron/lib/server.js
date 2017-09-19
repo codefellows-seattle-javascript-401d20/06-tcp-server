@@ -17,25 +17,40 @@ app.on('connection', (socket) => {
 
   socket.on('data', (data) => {
     let message = data.toString().trim();
-    if(message.startsWith('@')){
+    if (message.startsWith('@')) {
       let words = message.split(' ');
       let command = words[0];
       // let value = words.slice(1).join(' ');
-      switch(command){
-      case '@list':
+      switch (command) {
+      case '@list': {
         let nicknames = clients.map(c => c.nickname);
         socket.write(nicknames.join('\n') + '\n');
         return;
-      case '@nickname':
-        socket.write('under construction\n');
+      }
+      case '@nickname': {
+        let newUserName = message.trim().split(' ').slice(1).join(' ');
+        socket.nickname = newUserName;
+        socket.write(`your new username is ${socket.nickname}\n`);
         return;
-      default:
-        socket.write('try @list or @nickname\n');
+      }
+      case '@dm': {
+        let dmUser = message.trim().split(' ').slice(1).join(' ');
+
+        socket.write(`${dmUser}\n`);
+        return;
+      }
+      case '@quit': {
+        socket.write(`Good Bye ${socket.nickname}\n`);
+        return;
+      }
+      default: {
+        socket.write('try @list or @nickname <new user>\n');
+      }
       }
     }
 
     clients.forEach((client) => {
-      if(client !== socket)
+      if (client !== socket)
         client.write(`${socket.nickname}: ${message}\n`);
     });
   });
