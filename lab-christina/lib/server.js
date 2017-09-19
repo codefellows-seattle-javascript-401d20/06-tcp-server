@@ -4,16 +4,28 @@ const NET = require('net');
 const FAKER = require('faker');
 
 const APP = NET.createServer();
-let clients = [];
+let oldIdentity = [];
+let newIdentity = [];
+
 
 APP.on('connection', (socket) => {
   socket.nickname = FAKER.internet.userName();
-  clients.push(socket);
-  socket.write(`Welcome, ${socket.nickname}. Are you ready to leave all that is good in this world behind and assume your new identity? Answer Y or N.`);
+  oldIdentity.push(socket);
+  socket.write(`Welcome, ${socket.nickname}. Are you ready to leave behind all that is good in this world and assume your new identity? Answer Y or N.`);
+
   socket.on('data', (data) => {
-    let response = data.toString();
-    if(message)
-  })
+    switch (expression) {
+      case 'Y':
+        let socket.fakerName = FAKER.name.findName();
+        socket.write(`You will no long be referred to as ${socket.nickname}, forget that you ever were. You're now ${socket.fakerName}`);
+        socket.write(`Ple`)
+        break;
+      case 'N':
+        let socket.accessDenied = socket.nickname;
+        socket.write(`We're sorry to hear that ${socket.nickname}. You are now considered a threat to national security.`);
+        break;
+  });
+
 
   socket.on('data', (data) => {
     let message = data.toString().trim();
