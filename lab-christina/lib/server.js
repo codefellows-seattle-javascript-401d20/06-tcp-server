@@ -9,11 +9,29 @@ let clients = [];
 APP.on('connection', (socket) => {
   socket.nickname = FAKER.internet.userName();
   clients.push(socket);
-  socket.write('welcome to the chatroom\n');
-  socket.write(`your nickname is ${socket.nickname}`);
+  socket.write(`Welcome, ${socket.nickname}. Are you ready to leave all that is good in this world behind and assume your new identity? Answer Y or N.`);
+  socket.on('data', (data) => {
+    let response = data.toString();
+    if(message)
+  })
 
   socket.on('data', (data) => {
     let message = data.toString().trim();
+    if(message.startWith('@')){
+      let words = message.split(' ');
+      let command = words[0];
+      let value = words.slice(1).join(' ');
+      switch (command) {
+        case '@list':
+        case '@nickname':
+        case '@advice':
+        default:
+          socket.write('try @list or @nickname');
+
+      }
+    }
+  };
+
     clients.forEach((client) => {
       if(client !== socket);
         client.write(`${socket.nickname}: ${message}`);
