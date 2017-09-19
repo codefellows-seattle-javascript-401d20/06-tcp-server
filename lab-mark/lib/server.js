@@ -12,6 +12,7 @@ let validCommands = {
   '@quit': 'Allows users to leave the chatroom.',
   '@nickname <new name>': 'Sets user\'s nickname to new name.',
   '@dm <user> <message>': 'Sends a direct message to specified user.',
+  '@r <message>': 'Replies to last user who sent a direct message to you.',
 };
 
 let clientPool = [];
@@ -47,7 +48,6 @@ app.on('connection', (socket) => {
       }
       case '@quit': {
         socket.end(`Goodbye ${thisClient.nickname}!\n`);
-        // sayToAll(`${thisClient.nickname} left the chatroom.\n`);
         return;
       }
       case '@list': {
@@ -76,7 +76,7 @@ app.on('connection', (socket) => {
       case '@dm': {
         let nicknames = clientPool.map(client => client.nickname);
 
-        let client = words[1];
+        let user = words[1];
         let message = words.slice(2).join(' ');
 
         // Check if message was entered
@@ -84,11 +84,36 @@ app.on('connection', (socket) => {
           return socket.write(`Usage: @dm <user> <message>\n`);
 
         // Check if user exists.
-        if(!nicknames.includes(client))
-          return socket.write(`The user "${client}" is not connected to the server.\n`);
+        if(!nicknames.includes(user))
+          return socket.write(`The user "${user}" is not connected to the server.\n`);
 
-        let index = nicknames.indexOf(client);
+        let index = nicknames.indexOf(user);
         clientPool[index].socket.write(`DM from ${thisClient.nickname}: ${message}\n`);
+        clientPool[index].reply = thisClient.nickname;
+
+        return;
+      }
+      case '@r': {
+        // Nobody messaged you...
+        if (!thisClient.reply)
+          return socket.write('Usage: @r <message> (only works if someone previously messaged you directly.)\n');
+
+        let nicknames = clientPool.map(client => client.nickname);
+
+        let user = thisClient.reply;
+        let message = value;
+
+        // Check if message was entered
+        if (!message)
+          return socket.write(`Usage: @r <message>\n`);
+
+        // Check if user exists.
+        if(!nicknames.includes(user))
+          return socket.write(`The user "${user}" is not connected to the server.\n`);
+
+        let index = nicknames.indexOf(user);
+        clientPool[index].socket.write(`DM from ${thisClient.nickname}: ${message}\n`);
+        clientPool[index].reply = thisClient.nickname;
 
         return;
       }
@@ -119,7 +144,7 @@ app.on('connection', (socket) => {
 
   socket.on('error', (err) => {
     console.error('__SOCKET_ERROR__', err);
-    removeClient(socket);
+    removeClient(socket)(); // Will this work?
   });
 
   socket.on('close', removeClient(socket));
