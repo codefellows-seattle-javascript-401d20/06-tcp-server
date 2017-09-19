@@ -41,13 +41,13 @@ APP.on('connection', (socket) => {
           socket.write(nicknames.join('\n'));//lecture code
           return;
         case '@nickname':
-          let newAlias = faker.name.findName();
+        
           //I need to reassign the clients new alias. IDK wihtout testing if findname() accomplishes that but it seems too simple.
         case '@advice':
 
         case '@quit':
           SERVER.stop(PORT, () => {
-          console.log(`Goodbye and GoodLuck `);
+          console.log(`Goodbye and GoodLuck`);
         });
         default:
           socket.write('You deviated from the given list of commands, do not do it again. This is you only warning.');//wanted to add a while loop to limit amount of mistakes. IDK how in a switch statement
