@@ -43,9 +43,10 @@ app.on('connection', (socket) => {
           console.log(client.nickname);
           return client.nickname === targetNickname;
         })[0];
-        target.write('a message for you: ' + message);
+        target.write('a message for you: ' + message + '\n');
         return;
       case '@quit':
+        socket.write(`${socket.nickname} has left the chatroom \n`)
         socket.destroy();
         return;
       default:
