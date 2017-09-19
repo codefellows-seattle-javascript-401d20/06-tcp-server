@@ -28,19 +28,25 @@ app.on('connection', (socket) => {
         return;
       }
       case '@nickname': {
-        let newUserName = message.trim().split(' ').slice(1).join(' ');
+        let newUserName = message.split(' ').slice(1).join(' ').trim();
         socket.nickname = newUserName;
         socket.write(`your new username is ${socket.nickname}\n`);
         return;
       }
       case '@dm': {
-        let dmUser = message.trim().split(' ').slice(1).join(' ');
-
-        socket.write(`${dmUser}\n`);
+        let dmUser = message.split(' ').slice(1)[0];
+        let dmMessage =  message.split(' ').slice(2).join(' ');
+        
+        clients.forEach((client)=>{
+          if (client.nickname === dmUser) {
+            client.write(`from ${socket.nickname}: ${dmMessage}\n`);
+            return;
+          }
+        });
         return;
       }
       case '@quit': {
-        socket.write(`Good Bye ${socket.nickname}\n`);
+        socket.end(`Good Bye ${socket.nickname}\n`);
         return;
       }
       default: {
