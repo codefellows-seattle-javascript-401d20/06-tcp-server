@@ -13,7 +13,7 @@ Configure the root of your repository with the following files and directories. 
 * **README.md** - contains documentation
 * **.env** - contains env variables (should be git ignored)
 * **.gitignore** - contains a [robust](http://gitignore.io) `.gitignore` file 
-* **.eslintrc** - contains the course linter configuratoin
+* **.eslintrc.json** - contains the course linter configuratoin
 * **.eslintignore** - contains the course linter ignore configuration
 * **package.json** - contains npm package config
   * create a `lint` script for running eslint
@@ -23,7 +23,7 @@ Configure the root of your repository with the following files and directories. 
 * **\_\_test\_\_/** - contains unit tests
 
 ## Feature Tasks  
-For this assignment you will be building a TCP chatroom. Clients should be able to connect using a telnet client nickname them selfs and talk to each other. Clients should also be able to run special commands to quit, list users, reset their nickname, and send direct messages. You may add as many featrues to the chat as you would like. Do not use any third party librarys in your chatroom modules.
+For this assignment you will be building a TCP chatroom. Clients should be able to connect using a telnet client, nickname themselves and talk to each other. Clients should also be able to run special commands to quit, list users, reset their nickname, and send direct messages. You may add as many features to the chat as you would like. Do not use any third party libraries in your chatroom modules.
 
 #### Minimum Requirements 
 * Create a TCP Server using the NodeJS `net` module
@@ -32,7 +32,7 @@ For this assignment you will be building a TCP chatroom. Clients should be able 
 * Clients should be able to send messages to all other clients by sending it to the server
 * Clients should be able to run special commands by sending messages that start with a command name
   * The client should send `@quit` to disconnect
-  * The client should send `@list` to list all connectued users
+  * The client should send `@list` to list all connected users
   * The client should send `@nickname <new-name>` to change their nickname
   * The client should send `@dm <to-username> <message>` to  send a message directly to another user by nickname
 * Connected clients should be maintained in an in memory collection called the `clientPool`
@@ -41,7 +41,7 @@ For this assignment you will be building a TCP chatroom. Clients should be able 
   * When a socket emits the `data` event, the data should be logged on the server and the commands below should be implemented
 
 ##  Documentation  
-In your README.md describe the exported values of each module you have defined. Every function description should include it's airty (expected number of paramiters), the expected data for each paramiter (data-type and limitations), and it's behavior (for both valid and invalued use). Feel free to write any additional information in your README.md.
+In your README.md describe the exported values of each module you have defined. Every function description should include it's arity (expected number of parameters), the expected data for each parameter (data-type and limitations), and it's behavior (for both valid and invalid use). Feel free to write any additional information in your README.md.
 
 Also write documention for starting your server and connection using telnet. Write documentation for the chat room usage.
 
@@ -49,4 +49,4 @@ Also write documention for starting your server and connection using telnet. Wri
 No testing required for this lab. Yay!
 
 ## Bonus 1pt
-Use net.Socket to test your server. Your tests should include the ability to connect, send and recieve messages, and run special commands.
+Use net.Socket to test your server. Your tests should include the ability to connect, send and receive messages, and run special commands.
