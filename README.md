@@ -9,7 +9,7 @@
 * Submit on canvas a question and observation, how long you spent, and a link to your pull request
 
 ## Configuration 
-Configure the root of your repository with the following files and directories. Thoughfully name and organize any aditional configuration or module files.
+Configure the root of your repository with the following files and directories. Thoughtfully name and organize any additional configuration or module files.
 * **README.md** - contains documentation
 * **.env** - contains env variables (should be git ignored)
 * **.gitignore** - contains a [robust](http://gitignore.io) `.gitignore` file 
@@ -23,7 +23,7 @@ Configure the root of your repository with the following files and directories. 
 * **\_\_test\_\_/** - contains unit tests
 
 ## Feature Tasks  
-For this assignment you will be building a TCP chatroom. Clients should be able to connect using a telnet client, nickname themselves and talk to each other. Clients should also be able to run special commands to quit, list users, reset their nickname, and send direct messages. You may add as many features to the chat as you would like. Do not use any third party libraries in your chatroom modules.
+For this assignment you will be building a TCP chatroom. Clients should be able to connect using a telnet client, nickname themselves, and talk to each other. Clients should also be able to run special commands to quit, list users, reset their nickname, and send direct messages. You may add as many features to the chat as you would like. Do not use any third party libraries in your chatroom modules.
 
 #### Minimum Requirements 
 * Create a TCP Server using the NodeJS `net` module
